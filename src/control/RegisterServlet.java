@@ -34,12 +34,6 @@ public class RegisterServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* 业务逻辑：完成用户的注册功能
-		 * 	步骤：
-		 * 		① 接收前端传入的注册参数（注册信息）,可以从request对象中获取
-		 * 	    ② 把注册信息交给services完成注册
-		 *      ③ services调用Dao完成注册
-		 */
 		request.setCharacterEncoding("UTF-8");
 		String nickName = request.getParameter("nickName");
 		String sex = request.getParameter("sex");
@@ -49,18 +43,11 @@ public class RegisterServlet extends HttpServlet{
 		Users user = new Users(0,nickName,Integer.parseInt(sex),password);
 		boolean result = iuserServices.register(user);
 		if(result) {
-			/* 把结果响应前端-ok: 跳转到首页
-			 * 请求跳转方式：
-			 *    ① 请求转发
-			 *         地址栏url不会发生改变,能够附带数据
-			 *    ② 重定向
-			 *         地址栏url会发生改变，不会附带数据
-			 */
-			// 重定向
-			response.sendRedirect("index.jsp");
+//			response.sendRedirect("index.html");
+			request.setAttribute("info", "网络原因，注册失败，请重新注册");
+			request.getRequestDispatcher("register.jsp").forward(request, response);
 		}else {
-			// 把结果响应前端-no ok ：跳转到注册页重新注册，并提示错误信息
-			// 请求转发,附带数据
+//			response.sendRedirect("index.html");
 			request.setAttribute("info", "网络原因，注册失败，请重新注册");
 			request.getRequestDispatcher("register.jsp").forward(request, response);
 		}

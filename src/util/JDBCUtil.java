@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class JDBCUtil {
 	
-	private static String url = "jdbc:mysql://localhost:3307/myfriends?serverTimezone=GMT";
+	private static String url = "jdbc:mysql://localhost:3306/myfriends?serverTimezone=GMT";
 	private static String user = "root";
 	private static String password = "123456";
 	private static Connection conn = null;
